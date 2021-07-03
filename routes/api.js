@@ -4,8 +4,9 @@ const db = require('../models');
 
 router.get('/api/workouts/range', (req, res) => {
     db.Workout.find({})
+    .limit(7) // 7 days of data
+    .sort({ day: 1 }) // order by most recent first
     .then((data) => {
-        console.log(data)
         res.status(200).json(data)
     })
     .catch((err) => {
